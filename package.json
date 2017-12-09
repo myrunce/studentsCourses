@@ -1,0 +1,19 @@
+{
+  "name": "studentsCourses",
+  "version": "1.0.0",
+  "description": "Students Courses CRUD app for EVVEMI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular2-flash-messages": "^2.0.4",
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.4",
+    "mysql2": "^1.5.1"
+  }
+}

@@ -1,0 +1,16 @@
+<nav class="navbar-fixed nav-center">
+    <div class="nav-wrapper light-green darken-4">
+      <!-- <a [routerLink]="['']" class="brand-logo">StudentsCourses</a> -->
+      <ul class="hide-on-med-and-down right">
+        <li><a [routerLink]="['']">Home</a></li>
+        <li><a [routerLink]="['students']">Students</a></li>
+        <li><a [routerLink]="['courses']">Courses</a></li>
+      </ul>
+      <a href="#" materialize="sideNav" data-activates="nav-mobile" class="button-collapse right"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+<ul id="nav-mobile" class="side-nav hide-on-med-and-up">
+  <li><a [routerLink]="['']">Home</a></li>
+  <li><a [routerLink]="['students']">Students</a></li>
+  <li><a [routerLink]="['courses']">Courses</a></li>
+</ul>

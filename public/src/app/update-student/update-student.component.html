@@ -1,0 +1,37 @@
+<div class="section">
+  <h5 class="center">Update {{fName}} {{lName}}</h5>
+  <div class="container">
+    <div class="row" materialize *ngFor="let s of student">
+      <form (submit)="onSubmit()" #formData='ngForm' class='col s12'>
+        <div class="row">
+          <div class="input-field col s6">
+            <input placeholder="Placeholder" type="text" name="firstName" class="validate" required [(ngModel)]='s.first_name' #firstName="ngModel">
+            <label class="active" for="firstName">First Name</label>
+          </div>
+          <div class="input-field col s6">
+            <input placeholder="PlaceHolder" type="text" name="lastName" class="validate" required [(ngModel)]='s.last_name' #firstName="ngModel">
+            <label class="active" for="lastName" data-error="Last Name is required" data-success="Success">Last Name</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <input placeholder="PlaceHolder" type="number" name="age" class="validate" required [(ngModel)]='s.age' #age="ngModel">
+            <label class="active" for="age" data-error="Age is Required" data-success="Success">Age</label>
+          </div>
+          <div class="input-field col s6 push-s1">
+            <select materialize="material_select" name="coursesID" id="coursesID" multiple>
+              <option value="" disabled selected>Choose Courses</option>
+              <option *ngFor="let course of courses" [selected]="isChecked(course.id)" value="{{course.id}}">{{course.name}}</option>
+            </select>
+            <label>Select Courses To Enroll In</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s4">
+            <button class="btn light-green darken-4" type="submit" [disabled]='!formData.valid'>Update Student</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
