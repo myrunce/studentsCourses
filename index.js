@@ -10,8 +10,6 @@ app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, '/public/dist')));
 
-// require('./server/config/mySql.js');
-
 var routes_setter = require('./server/config/routes.js');
 routes_setter(app)
 

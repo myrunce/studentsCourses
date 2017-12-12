@@ -14,9 +14,11 @@ export class AddStudentComponent implements OnInit {
   courses;
   courseNumArr = [];
   id;
+
   constructor(private _mainService: MainService, private _router: Router) {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
+      console.log(this.courses);
     });
   }
 

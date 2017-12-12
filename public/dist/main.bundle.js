@@ -169,6 +169,7 @@ var AddStudentComponent = (function () {
         this.courseNumArr = [];
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
+            console.log(_this.courses);
         });
     }
     AddStudentComponent.prototype.ngOnInit = function () {
@@ -525,7 +526,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "\r\n", ""]);
+exports.push([module.i, "", ""]);
 
 // exports
 
