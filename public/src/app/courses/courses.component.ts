@@ -15,12 +15,14 @@ export class CoursesComponent implements OnInit {
   ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
-      console.log('got courses');
+      console.log('got courses in courses');
+      console.log(this.courses);
       for (let i = 0; i < this.courses.length; i++) {
         this._mainService.getCoursesStudents(this.courses[i].id, (result) => {
           this.studentsEnrolled.push(result.length);
         });
-        console.log('got students enrolled');
+        console.log('got students enrolled per course in courses');
+        console.log(this.studentsEnrolled);
       }
     });
   }

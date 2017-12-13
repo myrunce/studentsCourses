@@ -20,6 +20,7 @@ module.exports = {
         let sql = "SELECT * FROM students"
         let query = connection.query(sql, (err, results) => {
             if (err) throw err;
+            console.log('sucessful query getAllStudents: ' + results);
             return res.json(results);
         });
     },
@@ -27,6 +28,7 @@ module.exports = {
         let sql = `SELECT * FROM students WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getOneStudent: ' + result);
             return res.json(result);
         });
     },
@@ -40,6 +42,7 @@ module.exports = {
         ('${student.first_name}', '${student.last_name}', ${student.age}, NOW(), NOW())`;
         let query = connection.query(sql, student, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query addStudent: ' + result);
             return res.json(result);
         });
     },
@@ -52,6 +55,7 @@ module.exports = {
         let sql = `UPDATE students SET first_name = '${student.first_name}', last_name = '${student.last_name}', age = ${student.age}, updateD_at = NOW() WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query updateStudent: ' + result);
             return res.json(result);
         });
     },
@@ -59,6 +63,7 @@ module.exports = {
         let sql = `DELETE FROM students WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query deleteStudent: ' + result);
             return res.json(result);
         });
     },
@@ -66,6 +71,7 @@ module.exports = {
         let sql = "SELECT * FROM courses"
         let query = connection.query(sql, (err, results) => {
             if (err) throw err;
+            console.log('sucessful query getAllCourses: ' + results);
             return res.json(results);
         });
     },
@@ -73,6 +79,7 @@ module.exports = {
         let sql = `SELECT * FROM courses WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getOneCourse: ' + result);
             return res.json(result);
         });
     },
@@ -84,6 +91,7 @@ module.exports = {
         ('${course.name}', NOW(), NOW())`;
         let query = connection.query(sql, course, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query addCourse: ' + result);
             return res.json(result);
         });
     },
@@ -94,6 +102,7 @@ module.exports = {
         let sql = `UPDATE courses SET name = '${course.name}', updated_at = NOW() WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query updateCourse: ' + result);
             return res.json(result);
         });
     },
@@ -101,6 +110,7 @@ module.exports = {
         let sql = `DELETE FROM courses WHERE id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query deleteCourse: ' + result);
             return res.json(result);
         });
     },
@@ -108,6 +118,7 @@ module.exports = {
         let sql = 'SELECT * from students ORDER BY created_at DESC LIMIT 1';
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getLatestStudent: ' + result);
             return res.json(result);
         })
     },
@@ -115,14 +126,15 @@ module.exports = {
         let sql = 'SELECT * from courses ORDER BY created_at DESC LIMIT 1';
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getLatestCourse: ' + result);
             return res.json(result);
         })
     },
     enroll: (req, res) => {
-        console.log('enrolled');
         let sql = `INSERT INTO enrolled (students_id, courses_id) VALUES (${req.body.studentID}, ${req.body.courseID})`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query enroll: ' + result);
             return res.json(result);
         })
     },
@@ -130,6 +142,7 @@ module.exports = {
         let sql = `SELECT * FROM courses LEFT JOIN enrolled ON courses.id = enrolled.courses_id WHERE enrolled.students_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getStudentsCourses: ' + result);
             return res.json(result);
         })
     },
@@ -137,6 +150,7 @@ module.exports = {
         let sql = `SELECT * FROM students LEFT JOIN enrolled ON students.id = enrolled.students_id WHERE enrolled.courses_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getCoursesStudents: ' + result);
             return res.json(result);
         })
     },
@@ -144,6 +158,7 @@ module.exports = {
         let sql = `SELECT * FROM enrolled WHERE students_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getEnrolledCoursesIDforAStudent: ' + result);
             return res.json(result);
         })
     },
@@ -151,6 +166,7 @@ module.exports = {
         let sql = `DELETE FROM enrolled WHERE students_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query deleteEnrolledCourses: ' + result);
             return res.json(result);
         });
     },
@@ -158,6 +174,7 @@ module.exports = {
         let sql = `SELECT * FROM enrolled WHERE courses_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query getEnrolledStudentsIDforCourse: ' + result);
             return res.json(result);
         })
     },
@@ -165,6 +182,7 @@ module.exports = {
         let sql = `DELETE FROM enrolled WHERE courses_id = ${req.params.id}`;
         let query = connection.query(sql, (err, result) => {
             if (err) throw err;
+            console.log('sucessful query from deleteEnrolledStudents: ' + result);
             return res.json(result);
         });
     },

@@ -15,11 +15,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
-      console.log('got courses');
+      console.log('got courses in home');
+      console.log(this.courses);
     });
     this._mainService.getAllStudents((students) => {
       this.students = students;
-      console.log('got students');
+      console.log('got students in home');
+      console.log(this.students);
     });
   }
 

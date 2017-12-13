@@ -18,10 +18,12 @@ export class OneCourseComponent implements OnInit {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
     this._mainService.getOneCourse(this.id, (course) => {
       this.course = course[0];
-      console.log('got course');
+      console.log('got course in one-course');
+      console.log(this.course);
       this._mainService.getCoursesStudents(this.id, (students) => {
         this.students = students;
-        console.log('got students');
+        console.log('got students in one-course');
+        console.log(this.students);
       });
     });
   }

@@ -21,7 +21,8 @@ export class AddStudentComponent implements OnInit {
   ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
-      console.log('got courses');
+      console.log('got courses in add-student');
+      console.log(this.courses);
     });
   }
 
