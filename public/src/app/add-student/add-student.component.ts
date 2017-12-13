@@ -16,13 +16,13 @@ export class AddStudentComponent implements OnInit {
   id;
 
   constructor(private _mainService: MainService, private _router: Router) {
+  }
+
+  ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
       console.log(this.courses);
     });
-  }
-
-  ngOnInit() {
   }
 
   onSubmit() {

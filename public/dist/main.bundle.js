@@ -66,16 +66,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AddCourseComponent = (function () {
     function AddCourseComponent(_mainService, _router) {
-        var _this = this;
         this._mainService = _mainService;
         this._router = _router;
         this.course = new __WEBPACK_IMPORTED_MODULE_1__course__["a" /* Course */]();
         this.studentNumArr = [];
+    }
+    AddCourseComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
         });
-    }
-    AddCourseComponent.prototype.ngOnInit = function () {
     };
     AddCourseComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -162,17 +162,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var AddStudentComponent = (function () {
     function AddStudentComponent(_mainService, _router) {
-        var _this = this;
         this._mainService = _mainService;
         this._router = _router;
         this.student = new __WEBPACK_IMPORTED_MODULE_1__student__["a" /* Student */]();
         this.courseNumArr = [];
+    }
+    AddStudentComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
             console.log(_this.courses);
         });
-    }
-    AddStudentComponent.prototype.ngOnInit = function () {
     };
     AddStudentComponent.prototype.onSubmit = function () {
         var _this = this;
@@ -476,9 +476,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var CoursesComponent = (function () {
     function CoursesComponent(_mainService) {
-        var _this = this;
         this._mainService = _mainService;
         this.studentsEnrolled = [];
+    }
+    CoursesComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
             for (var i = 0; i < _this.courses.length; i++) {
@@ -489,8 +491,6 @@ var CoursesComponent = (function () {
                 });
             }
         });
-    }
-    CoursesComponent.prototype.ngOnInit = function () {
     };
     CoursesComponent.prototype.deleteCourse = function (id) {
         var _this = this;
@@ -624,18 +624,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var HomeComponent = (function () {
     function HomeComponent(_mainService) {
-        var _this = this;
         this._mainService = _mainService;
         this.courses = [];
         this.students = [];
+    }
+    HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
         });
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
         });
-    }
-    HomeComponent.prototype.ngOnInit = function () {
     };
     return HomeComponent;
 }());
@@ -886,9 +886,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var OneCourseComponent = (function () {
     function OneCourseComponent(_mainService, _activatedRoute) {
-        var _this = this;
         this._mainService = _mainService;
         this._activatedRoute = _activatedRoute;
+    }
+    OneCourseComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getOneCourse(this.id, function (course) {
             _this.course = course[0];
@@ -896,8 +898,6 @@ var OneCourseComponent = (function () {
                 _this.students = students;
             });
         });
-    }
-    OneCourseComponent.prototype.ngOnInit = function () {
     };
     return OneCourseComponent;
 }());
@@ -962,9 +962,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var OneStudentComponent = (function () {
     function OneStudentComponent(_mainService, _activatedRoute) {
-        var _this = this;
         this._mainService = _mainService;
         this._activatedRoute = _activatedRoute;
+    }
+    OneStudentComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getOneStudent(this.id, function (student) {
             _this.student = student[0];
@@ -972,8 +974,6 @@ var OneStudentComponent = (function () {
                 _this.courses = courses;
             });
         });
-    }
-    OneStudentComponent.prototype.ngOnInit = function () {
     };
     return OneStudentComponent;
 }());
@@ -1057,9 +1057,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var StudentsComponent = (function () {
     function StudentsComponent(_mainService) {
-        var _this = this;
         this._mainService = _mainService;
         this.courseEnrolled = [];
+    }
+    StudentsComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
             for (var i = 0; i < _this.students.length; i++) {
@@ -1068,8 +1070,6 @@ var StudentsComponent = (function () {
                 });
             }
         });
-    }
-    StudentsComponent.prototype.ngOnInit = function () {
     };
     StudentsComponent.prototype.deleteStudent = function (id) {
         var _this = this;
@@ -1147,11 +1147,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var UpdateCourseComponent = (function () {
     function UpdateCourseComponent(_activatedRoute, _mainService, _router) {
-        var _this = this;
         this._activatedRoute = _activatedRoute;
         this._mainService = _mainService;
         this._router = _router;
         this.studentNumArr = [];
+    }
+    UpdateCourseComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
@@ -1160,9 +1162,6 @@ var UpdateCourseComponent = (function () {
             _this.studentsEnrolled = students;
             console.log(_this.studentsEnrolled);
         });
-    }
-    UpdateCourseComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this._mainService.getOneCourse(this.id, function (course) {
             _this.course = course;
             _this.courseName = course[0].name;
@@ -1261,11 +1260,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var UpdateStudentComponent = (function () {
     function UpdateStudentComponent(_activatedRoute, _mainService, _router) {
-        var _this = this;
         this._activatedRoute = _activatedRoute;
         this._mainService = _mainService;
         this._router = _router;
         this.courseNumArr = [];
+    }
+    UpdateStudentComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
@@ -1274,9 +1275,6 @@ var UpdateStudentComponent = (function () {
             _this.coursesEnrolled = courses;
             console.log(_this.coursesEnrolled);
         });
-    }
-    UpdateStudentComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this._mainService.getOneStudent(this.id, function (student) {
             _this.student = student;
             _this.fName = student[0].first_name;

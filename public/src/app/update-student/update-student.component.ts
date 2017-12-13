@@ -18,7 +18,11 @@ export class UpdateStudentComponent implements OnInit {
   courses;
   coursesEnrolled;
   courseNumArr = [];
+
   constructor(private _activatedRoute: ActivatedRoute, private _mainService: MainService, private _router: Router) {
+  }
+
+  ngOnInit() {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
@@ -27,9 +31,6 @@ export class UpdateStudentComponent implements OnInit {
       this.coursesEnrolled = courses;
       console.log(this.coursesEnrolled);
     });
-  }
-
-  ngOnInit() {
     this._mainService.getOneStudent(this.id, (student) => {
       this.student = student;
       this.fName = student[0].first_name;

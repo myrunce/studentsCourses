@@ -10,15 +10,15 @@ export class HomeComponent implements OnInit {
   courses = [];
   students = [];
   constructor(private _mainService: MainService) {
+  }
+
+  ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
     });
     this._mainService.getAllStudents((students) => {
       this.students = students;
     });
-  }
-
-  ngOnInit() {
   }
 
 }

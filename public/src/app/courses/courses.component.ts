@@ -10,6 +10,9 @@ export class CoursesComponent implements OnInit {
   courses;
   studentsEnrolled = [];
   constructor(private _mainService: MainService) {
+  }
+
+  ngOnInit() {
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
       for (let i = 0; i < this.courses.length; i++) {
@@ -20,9 +23,6 @@ export class CoursesComponent implements OnInit {
         });
       }
     });
-  }
-
-  ngOnInit() {
   }
 
   deleteCourse(id) {

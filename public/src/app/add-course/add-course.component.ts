@@ -2,6 +2,7 @@ import { MainService } from '../main.service';
 import { Course } from './../course';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-add-course',
@@ -10,16 +11,16 @@ import { Router } from '@angular/router';
 })
 export class AddCourseComponent implements OnInit {
   course: Course = new Course();
-  students;
+  students: Observable<any>;
   studentNumArr = [];
   id;
   constructor(private _mainService: MainService, private _router: Router) {
-    this._mainService.getAllStudents((students) => {
-      this.students = students;
-    });
   }
 
   ngOnInit() {
+    this._mainService.getAllStudents((students) => {
+      this.students = students;
+    });
   }
 
   onSubmit() {

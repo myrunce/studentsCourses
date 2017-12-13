@@ -12,6 +12,9 @@ export class OneCourseComponent implements OnInit {
   course;
   id;
   constructor(private _mainService: MainService, private _activatedRoute: ActivatedRoute) {
+  }
+
+  ngOnInit() {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
     this._mainService.getOneCourse(this.id, (course) => {
       this.course = course[0];
@@ -19,9 +22,6 @@ export class OneCourseComponent implements OnInit {
         this.students = students;
       });
     });
-  }
-
-  ngOnInit() {
   }
 
 }
