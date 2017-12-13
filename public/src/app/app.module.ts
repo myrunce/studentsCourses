@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { MaterializeModule } from 'angular2-materialize';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -37,8 +36,7 @@ import { HomeComponent } from './home/home.component';
     AppRoutingModule,
     MaterializeModule,
     HttpModule,
-    FormsModule,
-    FlashMessagesModule
+    FormsModule
   ],
   providers: [MainService],
   bootstrap: [AppComponent]
