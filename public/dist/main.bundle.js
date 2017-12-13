@@ -75,6 +75,7 @@ var AddCourseComponent = (function () {
         var _this = this;
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
+            console.log('got students');
         });
     };
     AddCourseComponent.prototype.onSubmit = function () {
@@ -171,7 +172,7 @@ var AddStudentComponent = (function () {
         var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
-            console.log(_this.courses);
+            console.log('got courses');
         });
     };
     AddStudentComponent.prototype.onSubmit = function () {
@@ -483,12 +484,12 @@ var CoursesComponent = (function () {
         var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
+            console.log('got courses');
             for (var i = 0; i < _this.courses.length; i++) {
-                console.log(_this.courses[i].id);
                 _this._mainService.getCoursesStudents(_this.courses[i].id, function (result) {
-                    console.log(result);
                     _this.studentsEnrolled.push(result.length);
                 });
+                console.log('got students enrolled');
             }
         });
     };
@@ -632,9 +633,11 @@ var HomeComponent = (function () {
         var _this = this;
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
+            console.log('got courses');
         });
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
+            console.log('got students');
         });
     };
     return HomeComponent;
@@ -894,8 +897,10 @@ var OneCourseComponent = (function () {
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getOneCourse(this.id, function (course) {
             _this.course = course[0];
+            console.log('got course');
             _this._mainService.getCoursesStudents(_this.id, function (students) {
                 _this.students = students;
+                console.log('got students');
             });
         });
     };
@@ -970,8 +975,10 @@ var OneStudentComponent = (function () {
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getOneStudent(this.id, function (student) {
             _this.student = student[0];
+            console.log('got student');
             _this._mainService.getStudentsCourses(_this.id, function (courses) {
                 _this.courses = courses;
+                console.log('got course');
             });
         });
     };
@@ -1064,11 +1071,13 @@ var StudentsComponent = (function () {
         var _this = this;
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
+            console.log('got students');
             for (var i = 0; i < _this.students.length; i++) {
                 _this._mainService.getStudentsCourses(_this.students[i].id, function (result) {
                     _this.courseEnrolled.push(result.length);
                 });
             }
+            console.log('got courses enrolled');
         });
     };
     StudentsComponent.prototype.deleteStudent = function (id) {
@@ -1157,14 +1166,16 @@ var UpdateCourseComponent = (function () {
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getAllStudents(function (students) {
             _this.students = students;
+            console.log('got students');
         });
         this._mainService.getStudentsIDforCourse(this.id, function (students) {
             _this.studentsEnrolled = students;
-            console.log(_this.studentsEnrolled);
+            console.log('got students enrolled');
         });
         this._mainService.getOneCourse(this.id, function (course) {
             _this.course = course;
             _this.courseName = course[0].name;
+            console.log('set name and got course');
         });
     };
     UpdateCourseComponent.prototype.onSubmit = function () {
@@ -1270,15 +1281,17 @@ var UpdateStudentComponent = (function () {
         this.id = this._activatedRoute.snapshot.paramMap.get('id');
         this._mainService.getAllCourses(function (courses) {
             _this.courses = courses;
+            console.log('got courses');
         });
         this._mainService.getCoursesIDforStudent(this.id, function (courses) {
             _this.coursesEnrolled = courses;
-            console.log(_this.coursesEnrolled);
+            console.log('got courses enrolled');
         });
         this._mainService.getOneStudent(this.id, function (student) {
             _this.student = student;
             _this.fName = student[0].first_name;
             _this.lName = student[0].last_name;
+            console.log('got student and set first and last name');
         });
     };
     UpdateStudentComponent.prototype.onSubmit = function () {

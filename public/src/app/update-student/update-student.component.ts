@@ -26,15 +26,17 @@ export class UpdateStudentComponent implements OnInit {
     this.id = this._activatedRoute.snapshot.paramMap.get('id');
     this._mainService.getAllCourses((courses) => {
       this.courses = courses;
+      console.log('got courses');
     });
     this._mainService.getCoursesIDforStudent(this.id, (courses) => {
       this.coursesEnrolled = courses;
-      console.log(this.coursesEnrolled);
+      console.log('got courses enrolled');
     });
     this._mainService.getOneStudent(this.id, (student) => {
       this.student = student;
       this.fName = student[0].first_name;
       this.lName = student[0].last_name;
+      console.log('got student and set first and last name');
     });
   }
 
