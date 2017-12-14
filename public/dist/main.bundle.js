@@ -451,7 +451,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/courses/courses.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section\"></div>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s11\">\n      <table class=\"striped centered responsive-table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>Students Enrolled</th>\n            <th>Created On</th>\n            <th>Updated On</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let course of courses; let i = index\">\n            <td>{{course.id}}</td>\n            <td>{{course.name}}</td>\n            <td>{{studentsEnrolled[i]}}</td>\n            <td>{{course.created_at | date}}</td>\n            <td>{{course.updated_at | date}}</td>\n            <td><button class=\"btn green small\" [routerLink]=\"[course.id]\">View</button> <button class=\"btn red small\" (click)=\"deleteCourse(course.id)\"> Delete</button> <button class=\"btn blue small\" [routerLink]=\"['update', course.id]\">Update</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<div class=\"fixed-action-btn\">\n  <button class='btn light-green darken-4' [routerLink]=\"['add']\" id=\"margin\">Add Course</button>\n</div>\n"
+module.exports = "<div class=\"section\"></div>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s11\">\n      <table class=\"striped centered responsive-table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>Students Enrolled</th>\n            <th>Created On</th>\n            <th>Updated On</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let course of courses; let i = index\">\n            <td>{{course.id}}</td>\n            <td>{{course.name}}</td>\n            <td>{{displayLength(course.id)}}</td>\n            <td>{{course.created_at | date}}</td>\n            <td>{{course.updated_at | date}}</td>\n            <td><button class=\"btn green small\" [routerLink]=\"[course.id]\">View</button> <button class=\"btn red small\" (click)=\"deleteCourse(course.id)\"> Delete</button> <button class=\"btn blue small\" [routerLink]=\"['update', course.id]\">Update</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<div class=\"fixed-action-btn\">\n  <button class='btn light-green darken-4' [routerLink]=\"['add']\" id=\"margin\">Add Course</button>\n</div>\n"
 
 /***/ }),
 
@@ -484,12 +484,20 @@ var CoursesComponent = (function () {
             _this.courses = courses;
             console.log('got courses in courses');
             console.log(_this.courses);
-            for (var i = 0; i < _this.courses.length; i++) {
+            var _loop_1 = function (i) {
                 _this._mainService.getCoursesStudents(_this.courses[i].id, function (result) {
-                    _this.studentsEnrolled.push(result.length);
+                    if (result.length === 0) {
+                        _this.studentsEnrolled.push({ id: courses[i].id, num: 0 });
+                    }
+                    else {
+                        _this.studentsEnrolled.push({ id: result[i].courses_id, num: result.length });
+                    }
                 });
                 console.log('got students enrolled per course in courses');
                 console.log(_this.studentsEnrolled);
+            };
+            for (var i = 0; i < _this.courses.length; i++) {
+                _loop_1(i);
             }
         });
     };
@@ -502,6 +510,13 @@ var CoursesComponent = (function () {
                 });
             });
         });
+    };
+    CoursesComponent.prototype.displayLength = function (id) {
+        for (var i = 0; i < this.studentsEnrolled.length; i++) {
+            if (id === this.studentsEnrolled[i].id) {
+                return this.studentsEnrolled[i].num;
+            }
+        }
     };
     return CoursesComponent;
 }());
@@ -832,6 +847,14 @@ var MainService = (function () {
             throw err;
         });
     };
+    MainService.prototype.test = function (callback) {
+        this._http.get('/api/test')
+            .subscribe(function (response) {
+            callback(response);
+        }, function (err) {
+            throw err;
+        });
+    };
     return MainService;
 }());
 MainService = __decorate([
@@ -1045,7 +1068,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/students/students.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"section\"></div>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s11\">\n      <table class=\"striped centered responsive-table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>Age</th>\n            <th>Courses Taken</th>\n            <th>Created On</th>\n            <th>Updated On</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let student of students; let i = index\">\n            <td>{{student.id}}</td>\n            <td>{{student.first_name}} {{student.last_name}}</td>\n            <td>{{student.age}}</td>\n            <td>{{courseEnrolled[i]}}</td>\n            <td>{{student.created_at | date}}</td>\n            <td>{{student.updated_at | date}}</td>\n            <td><button class=\"btn green small\" [routerLink]=\"[student.id]\">View</button> <button class=\"btn red small\" (click)=\"deleteStudent(student.id)\"> Delete</button> <button class=\"btn blue small\" [routerLink]=\"['update', student.id]\">Update</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<div class=\"fixed-action-btn\">\n  <button class='btn light-green darken-4' [routerLink]=\"['add']\" id=\"margin\">Add Student</button>\n</div>\n"
+module.exports = "<div class=\"section\"></div>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col s11\">\n      <table class=\"striped centered responsive-table\">\n        <thead>\n          <tr>\n            <th>ID</th>\n            <th>Name</th>\n            <th>Age</th>\n            <th>Courses Taken</th>\n            <th>Created On</th>\n            <th>Updated On</th>\n            <th>Actions</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let student of students; let i = index\">\n            <td>{{student.id}}</td>\n            <td>{{student.first_name}} {{student.last_name}}</td>\n            <td>{{student.age}}</td>\n            <td>{{displayLength(student.id)}}</td>\n            <td>{{student.created_at | date}}</td>\n            <td>{{student.updated_at | date}}</td>\n            <td><button class=\"btn green small\" [routerLink]=\"[student.id]\">View</button> <button class=\"btn red small\" (click)=\"deleteStudent(student.id)\"> Delete</button> <button class=\"btn blue small\" [routerLink]=\"['update', student.id]\">Update</button></td>\n          </tr>\n        </tbody>\n      </table>\n    </div>\n  </div>\n</div>\n<div class=\"fixed-action-btn\">\n  <button class='btn light-green darken-4' [routerLink]=\"['add']\" id=\"margin\">Add Student</button>\n</div>\n"
 
 /***/ }),
 
@@ -1078,10 +1101,18 @@ var StudentsComponent = (function () {
             _this.students = students;
             console.log('got students in students');
             console.log(_this.students);
-            for (var i = 0; i < _this.students.length; i++) {
+            var _loop_1 = function (i) {
                 _this._mainService.getStudentsCourses(_this.students[i].id, function (result) {
-                    _this.courseEnrolled.push(result.length);
+                    if (result.length === 0) {
+                        _this.courseEnrolled.push({ id: students[i].id, num: 0 });
+                    }
+                    else {
+                        _this.courseEnrolled.push({ id: result[i].students_id, num: result.length });
+                    }
                 });
+            };
+            for (var i = 0; i < _this.students.length; i++) {
+                _loop_1(i);
             }
             console.log('got number of courses enrolled per student in students');
             console.log(_this.courseEnrolled);
@@ -1096,6 +1127,13 @@ var StudentsComponent = (function () {
                 });
             });
         });
+    };
+    StudentsComponent.prototype.displayLength = function (id) {
+        for (var i = 0; i < this.courseEnrolled.length; i++) {
+            if (id === this.courseEnrolled[i].id) {
+                return this.courseEnrolled[i].num;
+            }
+        }
     };
     return StudentsComponent;
 }());

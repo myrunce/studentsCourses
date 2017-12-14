@@ -19,7 +19,11 @@ export class CoursesComponent implements OnInit {
       console.log(this.courses);
       for (let i = 0; i < this.courses.length; i++) {
         this._mainService.getCoursesStudents(this.courses[i].id, (result) => {
-          this.studentsEnrolled.push(result.length);
+          if (result.length === 0) {
+            this.studentsEnrolled.push({id: courses[i].id, num: 0});
+          } else {
+            this.studentsEnrolled.push({id: result[i].courses_id, num: result.length});
+          }
         });
         console.log('got students enrolled per course in courses');
         console.log(this.studentsEnrolled);
@@ -35,5 +39,13 @@ export class CoursesComponent implements OnInit {
         });
       });
     });
+  }
+
+  displayLength(id) {
+    for (let i = 0; i < this.studentsEnrolled.length; i++) {
+      if (id === this.studentsEnrolled[i].id) {
+        return this.studentsEnrolled[i].num;
+      }
+    }
   }
 }

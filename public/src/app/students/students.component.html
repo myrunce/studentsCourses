@@ -19,7 +19,7 @@
             <td>{{student.id}}</td>
             <td>{{student.first_name}} {{student.last_name}}</td>
             <td>{{student.age}}</td>
-            <td>{{courseEnrolled[i]}}</td>
+            <td>{{displayLength(student.id)}}</td>
             <td>{{student.created_at | date}}</td>
             <td>{{student.updated_at | date}}</td>
             <td><button class="btn green small" [routerLink]="[student.id]">View</button> <button class="btn red small" (click)="deleteStudent(student.id)"> Delete</button> <button class="btn blue small" [routerLink]="['update', student.id]">Update</button></td>

@@ -215,4 +215,15 @@ export class MainService {
       }
     );
   }
+  test(callback) {
+    this._http.get('/api/test')
+    .subscribe(
+      (response) => {
+        callback(response);
+      },
+      (err) => {
+        throw err;
+      }
+    );
+  }
 }

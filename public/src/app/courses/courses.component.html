@@ -17,7 +17,7 @@
           <tr *ngFor="let course of courses; let i = index">
             <td>{{course.id}}</td>
             <td>{{course.name}}</td>
-            <td>{{studentsEnrolled[i]}}</td>
+            <td>{{displayLength(course.id)}}</td>
             <td>{{course.created_at | date}}</td>
             <td>{{course.updated_at | date}}</td>
             <td><button class="btn green small" [routerLink]="[course.id]">View</button> <button class="btn red small" (click)="deleteCourse(course.id)"> Delete</button> <button class="btn blue small" [routerLink]="['update', course.id]">Update</button></td>
