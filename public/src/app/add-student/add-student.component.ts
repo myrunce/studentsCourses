@@ -3,6 +3,7 @@ import { Student } from '../student';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-add-student',
   templateUrl: './add-student.component.html',

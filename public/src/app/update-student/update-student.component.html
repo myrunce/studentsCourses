@@ -19,7 +19,7 @@
             <label class="active" for="age" data-error="Age is Required" data-success="Success">Age</label>
           </div>
           <div class="input-field col s6 push-s1">
-            <select materialize="material_select" name="coursesID" id="coursesID" multiple>
+            <select materialize="material_select" [materializeSelectOptions]="courses" name="coursesID" id="coursesID" multiple>
               <option value="" disabled selected>Choose Courses</option>
               <option *ngFor="let course of courses" [selected]="isChecked(course.id)" value="{{course.id}}">{{course.name}}</option>
             </select>

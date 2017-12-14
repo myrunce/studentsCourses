@@ -19,7 +19,7 @@
           <label for="age" data-error="Age is Required" data-success="Success">Age</label>
         </div>
         <div class="input-field col s6 push-s1">
-          <select multiple materialize="material_select" name="courses" [(ngModel)]="courseNumArr" #courseNums="ngModel">
+          <select multiple materialize="material_select" [materializeSelectOptions]="courses" name="courses" [(ngModel)]="courseNumArr" #courseNums="ngModel">
               <option value="" disabled selected>Courses</option>
               <option type="number" *ngFor="let course of courses" value="{{course.id}}">{{course.name}}</option>
           </select>

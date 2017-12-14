@@ -9,7 +9,7 @@
             <label class="active" for="courseName">Course Name</label>
           </div>
           <div class="input-field col s6">
-            <select materialize="material_select" name="studentsID" id="studentsID" multiple>
+            <select materialize="material_select" [materializeSelectOptions]="students" name="studentsID" id="studentsID" multiple>
               <option value="" disabled selected>Choose Students</option>
               <option *ngFor="let student of students" [selected]="isChecked(student.id)" value="{{student.id}}">{{student.first_name}}  {{student.last_name}}</option>
             </select>

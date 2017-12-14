@@ -9,7 +9,7 @@
           <label for="name" data-error="Course Name is required" data-success="Success">Course Name</label>
         </div>
         <div class="input-field col s6">
-            <select multiple materialize="material_select" name="courses" [(ngModel)]="studentNumArr" #courseNums="ngModel">
+            <select multiple materialize="material_select" [materializeSelectOptions]="students" name="students" [(ngModel)]="studentNumArr" #courseNums="ngModel">
                 <option value="" disabled selected>Students</option>
                 <option type="number" *ngFor="let student of students" value="{{student.id}}">{{student.first_name}} {{student.last_name}}</option>
             </select>
