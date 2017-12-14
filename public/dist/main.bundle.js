@@ -487,10 +487,10 @@ var CoursesComponent = (function () {
             var _loop_1 = function (i) {
                 _this._mainService.getCoursesStudents(_this.courses[i].id, function (result) {
                     if (result.length === 0) {
-                        _this.studentsEnrolled.push({ id: courses[i].id, num: 0 });
+                        _this.studentsEnrolled.push({ id: _this.courses[i].id, num: 0 });
                     }
                     else {
-                        _this.studentsEnrolled.push({ id: result[i].courses_id, num: result.length });
+                        _this.studentsEnrolled.push({ id: _this.courses[i].id, num: result.length });
                     }
                 });
                 console.log('got students enrolled per course in courses');
@@ -1104,10 +1104,10 @@ var StudentsComponent = (function () {
             var _loop_1 = function (i) {
                 _this._mainService.getStudentsCourses(_this.students[i].id, function (result) {
                     if (result.length === 0) {
-                        _this.courseEnrolled.push({ id: students[i].id, num: 0 });
+                        _this.courseEnrolled.push({ id: _this.students[i].id, num: 0 });
                     }
                     else {
-                        _this.courseEnrolled.push({ id: result[i].students_id, num: result.length });
+                        _this.courseEnrolled.push({ id: _this.students[i].id, num: result.length });
                     }
                 });
             };

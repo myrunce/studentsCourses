@@ -20,9 +20,9 @@ export class StudentsComponent implements OnInit {
       for (let i = 0; i < this.students.length; i++) {
         this._mainService.getStudentsCourses(this.students[i].id, (result) => {
           if (result.length === 0) {
-            this.courseEnrolled.push({id: students[i].id, num: 0});
+            this.courseEnrolled.push({id: this.students[i].id, num: 0});
           } else {
-            this.courseEnrolled.push({id: result[i].students_id, num: result.length});
+            this.courseEnrolled.push({id: this.students[i].id, num: result.length});
           }
         });
       }
